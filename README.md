@@ -47,7 +47,7 @@ To build Anemone without substrate dependencies, set "NO_SUBSTRATE=1"
 
 No. Although the public release build of Anemone with Optitheme enabled requires RocketBootStrap, Anemone can run in slower, fallback mode instead.
 
-To build Anemone without rocketbootstrap dependencies, set "NO_SUBSTRATE=1"
+To build Anemone without rocketbootstrap dependencies, set "NO_OPTITHEME=1"
 
 ## Can I build for the iOS Simulator?
 
