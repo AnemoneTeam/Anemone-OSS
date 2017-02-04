@@ -5,8 +5,7 @@ ARCHS = armv7 arm64
 include theos/makefiles/common.mk
 
 TWEAK_NAME = Anemone
-Anemone_FILES = Badges.xm
-#Anemone_FILES = Badges.xm Clock.xm Calendar.xm PageDots.xm NoRespring.xm
+Anemone_FILES = Badges.xm Clock.xm Calendar.xm PageDots.xm NoRespring.xm
 Anemone_FRAMEWORKS = UIKit CoreGraphics QuartzCore
 ifeq ($(NO_OPTITHEME),1)
 	Anemone_CFLAGS += -DNO_OPTITHEME
