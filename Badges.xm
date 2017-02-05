@@ -94,7 +94,7 @@ static void loadBadgeSettings(){
 	}
 }
 
-@interface SBIconAccessoryImage : NSObject
+@interface SBIconAccessoryImage : UIImage
 - (id)initWithImage:(UIImage *)image;
 @end
 
@@ -133,7 +133,7 @@ static void loadBadgeSettings(){
 @end
 
 @interface SBDarkeningImageView
-@property (nonatomic, retain) SBIconAccessoryImage *image;
+@property (nonatomic, retain) UIImage *image;
 @end
 
 @interface SBIconBadgeView : UIView
@@ -188,12 +188,26 @@ static void loadBadgeSettings(){
 - (void)prepareForReuse {
 	%orig;
 	
+	BOOL isiOS70 = (kCFCoreFoundationVersionNumber < 847.24);
+
+	SBDarkeningImageView *backgroundView = [self valueForKey:@"_backgroundView"];
+
 	SBIconAccessoryImage *backgroundImage = [%c(SBIconBadgeView) _checkoutBackgroundImage];
 	
+	UIImage *currentBackgroundImage = backgroundView.image;
+	if (isiOS70)
+		currentBackgroundImage = [self valueForKey:@"_backgroundImage"];
+	else
+		currentBackgroundImage = backgroundView.image;
+
 	[self setValue:backgroundImage forKey:@"_backgroundImage"];
-	
-	SBDarkeningImageView *backgroundView = [self valueForKey:@"_backgroundView"];
-	backgroundView.image = backgroundImage;
+
+	if (isiOS70)
+		backgroundView.image = backgroundImage;
+	else {
+		UIEdgeInsets capInsets = currentBackgroundImage.capInsets;
+		backgroundView.image = [backgroundImage resizableImageWithCapInsets:capInsets];
+	}
 }
 
 %end
