@@ -44,7 +44,7 @@ static NSMutableDictionary *cachedBundles = nil;
 
 - (NSString *) anemoneThemedPath:(BOOL)enableLegacy {
 	if (kCFCoreFoundationVersionNumber > MaxSupportedCFVersion)
-        return self;
+		return self;
 	NSString *themesDir = [[ANEMSettingsManager sharedManager] themesDir];
 
 	if ([self hasPrefix:@"/var/stash/anemonecache"])
@@ -110,8 +110,8 @@ static NSMutableDictionary *cachedBundles = nil;
 			} else {
 				if ([bundle bundlePath] != nil){
 					dlopen("/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport", RTLD_NOW);
-    				CPDistributedMessagingCenter *client = [objc_getClass("CPDistributedMessagingCenter") centerNamed:@"com.anemonetheming.anemone.optitheme"];
-    				rocketbootstrap_distributedmessagingcenter_apply(client);
+					CPDistributedMessagingCenter *client = [objc_getClass("CPDistributedMessagingCenter") centerNamed:@"com.anemonetheming.anemone.optitheme"];
+					rocketbootstrap_distributedmessagingcenter_apply(client);
 					NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[bundle bundlePath],@"Path",nil];
 					[client sendMessageName:@"cacheCarWithOptions" userInfo:dict];
 				}
@@ -235,7 +235,7 @@ static NSMutableDictionary *cachedBundles = nil;
 
 - (NSString *)pathForResource:(NSString *)resource ofType:(NSString *)type {
 	if (kCFCoreFoundationVersionNumber > MaxSupportedCFVersion)
-        return %orig;
+		return %orig;
 	NSString *themesDir = [[ANEMSettingsManager sharedManager] themesDir];
 
 	NSString *fileName;
@@ -258,8 +258,8 @@ static NSMutableDictionary *cachedBundles = nil;
 		} else {
 			if ([self bundlePath] != nil){
 				dlopen("/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport", RTLD_NOW);
-    			CPDistributedMessagingCenter *client = [objc_getClass("CPDistributedMessagingCenter") centerNamed:@"com.anemonetheming.anemone.optitheme"];
-    			rocketbootstrap_distributedmessagingcenter_apply(client);
+				CPDistributedMessagingCenter *client = [objc_getClass("CPDistributedMessagingCenter") centerNamed:@"com.anemonetheming.anemone.optitheme"];
+				rocketbootstrap_distributedmessagingcenter_apply(client);
 				NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:[self bundlePath],@"Path",nil];
 				[client sendMessageName:@"cacheCarWithOptions" userInfo:dict];
 			}

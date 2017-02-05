@@ -271,9 +271,9 @@ static void loadCalendarSettings(){
 
 %ctor {
 	if (kCFCoreFoundationVersionNumber > MaxSupportedCFVersion)
-        return;
+		return;
 	if (objc_getClass("ANEMSettingsManager") == nil){
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/AnemoneCore.dylib",RTLD_LAZY);
-    }
-    [[%c(ANEMSettingsManager) sharedManager] addEventHandler:[AnemoneCalendarIconEventHandler new]];
+		dlopen("/Library/MobileSubstrate/DynamicLibraries/AnemoneCore.dylib",RTLD_LAZY);
+	}
+	[[%c(ANEMSettingsManager) sharedManager] addEventHandler:[AnemoneCalendarIconEventHandler new]];
 }

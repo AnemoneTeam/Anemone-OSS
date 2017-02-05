@@ -215,7 +215,7 @@ static void loadPageDotImages(){
 
 %ctor {
 	if (objc_getClass("ANEMSettingsManager") == nil){
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/AnemoneCore.dylib",RTLD_LAZY);
-    }
+		dlopen("/Library/MobileSubstrate/DynamicLibraries/AnemoneCore.dylib",RTLD_LAZY);
+	}
 	[[%c(ANEMSettingsManager) sharedManager] addEventHandler:[AnemonePageDotsEventHandler new]];
 }

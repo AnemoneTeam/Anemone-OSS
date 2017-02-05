@@ -159,19 +159,19 @@ static void loadClockImages(){
 
 	UIImage *ret = [UIImage imageNamed:@"ClockIconBackgroundSquare"];
 
-    UIGraphicsBeginImageContextWithOptions(origImageSize, NO, 0.0);
-    
-    CGSize imageSize = CGSizeMake(60, 60);
-    if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
-        if (MAX([[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height) == 1366){ //iPad Pro
-            imageSize = CGSizeMake(83.5, 83.5);
-        } else
-            imageSize = CGSizeMake(76, 76);
-    }
-    
-    [ret drawInRect:CGRectMake((origImageSize.width-imageSize.width)/2.0,(origImageSize.height-imageSize.height)/2.0,imageSize.width,imageSize.height)];
-    ret = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+	UIGraphicsBeginImageContextWithOptions(origImageSize, NO, 0.0);
+	
+	CGSize imageSize = CGSizeMake(60, 60);
+	if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){
+		if (MAX([[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height) == 1366){ //iPad Pro
+			imageSize = CGSizeMake(83.5, 83.5);
+		} else
+			imageSize = CGSizeMake(76, 76);
+	}
+	
+	[ret drawInRect:CGRectMake((origImageSize.width-imageSize.width)/2.0,(origImageSize.height-imageSize.height)/2.0,imageSize.width,imageSize.height)];
+	ret = UIGraphicsGetImageFromCurrentImageContext();
+	UIGraphicsEndImageContext();
 
 	if (ret != nil){
 		UIImage *maskImage = nil;
@@ -245,10 +245,10 @@ static void loadClockImages(){
 
 %ctor {
 	if (kCFCoreFoundationVersionNumber > MaxSupportedCFVersion)
-        return;
+		return;
 	%init(all);
 	if (objc_getClass("ANEMSettingsManager") == nil){
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/AnemoneCore.dylib",RTLD_LAZY);
-    }
+		dlopen("/Library/MobileSubstrate/DynamicLibraries/AnemoneCore.dylib",RTLD_LAZY);
+	}
 	[[%c(ANEMSettingsManager) sharedManager] addEventHandler:[AnemoneClockEventHandler new]];
 }

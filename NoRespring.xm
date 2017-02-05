@@ -44,10 +44,10 @@
 	self = [super init];
 	_server = [[objc_getClass("CPDistributedMessagingCenter") centerNamed:@"com.anemonetheming.anemone.springboard"] retain];
 	rocketbootstrap_distributedmessagingcenter_apply(_server);
-    [_server runServerOnCurrentThread];
-    [_server registerForMessageName:@"forceReloadNow" target:self selector:@selector(forceReloadNow)];
-    [_server registerForMessageName:@"ping" target:self selector:@selector(ping)];
-    return self;
+	[_server runServerOnCurrentThread];
+	[_server registerForMessageName:@"forceReloadNow" target:self selector:@selector(forceReloadNow)];
+	[_server registerForMessageName:@"ping" target:self selector:@selector(ping)];
+	return self;
 }
 
 - (NSDictionary *)ping {
@@ -97,7 +97,7 @@
 %hook SpringBoard
 -(id)init {
 	if (kCFCoreFoundationVersionNumber > MaxSupportedCFVersion)
-        return %orig;
+		return %orig;
 	self = %orig;
 	dlopen("/System/Library/PrivateFrameworks/AppSupport.framework/AppSupport", RTLD_NOW);
 	[[AnemoneNoRespringServer alloc] init];

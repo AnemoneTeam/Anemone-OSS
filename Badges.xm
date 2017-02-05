@@ -145,9 +145,9 @@ static void loadBadgeSettings(){
 
 + (SBIconAccessoryImage *)_checkoutBackgroundImage {
 	if ([UIImage imageNamed:@"SBBadgeBG.png"])
-    	return [[[%c(SBIconAccessoryImage) alloc] initWithImage:[UIImage imageNamed:@"SBBadgeBG.png"]] autorelease];
-    else
-    	return %orig;
+		return [[[%c(SBIconAccessoryImage) alloc] initWithImage:[UIImage imageNamed:@"SBBadgeBG.png"]] autorelease];
+	else
+		return %orig;
 }
 
 + (SBIconAccessoryImage *)_checkoutImageForText:(NSString *)text highlighted:(BOOL)highlighted {
@@ -191,9 +191,9 @@ static void loadBadgeSettings(){
 
 %ctor {
 	if (kCFCoreFoundationVersionNumber > MaxSupportedCFVersion)
-        return;
+		return;
 	if (objc_getClass("ANEMSettingsManager") == nil){
-        dlopen("/Library/MobileSubstrate/DynamicLibraries/AnemoneCore.dylib",RTLD_LAZY);
-    }
+		dlopen("/Library/MobileSubstrate/DynamicLibraries/AnemoneCore.dylib",RTLD_LAZY);
+	}
 	[[%c(ANEMSettingsManager) sharedManager] addEventHandler:[AnemoneBadgesEventHandler new]];
 }

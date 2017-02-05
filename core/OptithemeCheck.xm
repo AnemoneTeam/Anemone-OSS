@@ -14,9 +14,9 @@
 - (void)applicationDidResume {
 	%orig;
 	NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath:optiThemeTouchFilePath error:nil];
-    NSDate *date = [attributes fileModificationDate];
-    if ([date timeIntervalSinceDate:[[ANEMSettingsManager sharedManager] optiThemeReloadDate]] > 0){
-    	[[ANEMSettingsManager sharedManager] setOptithemeEnabled:NO];
-    }
+	NSDate *date = [attributes fileModificationDate];
+	if ([date timeIntervalSinceDate:[[ANEMSettingsManager sharedManager] optiThemeReloadDate]] > 0){
+		[[ANEMSettingsManager sharedManager] setOptithemeEnabled:NO];
+	}
 }
 %end
