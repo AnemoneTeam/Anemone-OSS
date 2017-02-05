@@ -138,8 +138,17 @@ static void loadBadgeSettings(){
 
 @interface SBIconBadgeView : UIView
 + (SBIconAccessoryImage *)_checkoutBackgroundImage;
+- (void)prepareForReuse;
 @end
 
+%hook SBIconView
+- (void)prepareForReuse {
+	%orig;
+	SBIconBadgeView *badgeView = [self valueForKey:@"_accessoryView"];
+	if ([badgeView respondsToSelector:@selector(prepareForReuse)])
+		[badgeView prepareForReuse];
+}
+%end
 
 %hook SBIconBadgeView
 

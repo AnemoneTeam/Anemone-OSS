@@ -4,11 +4,15 @@
 #import <dlfcn.h>
 #import <objc/runtime.h>
 
-@interface SBIconListView : NSObject
+@interface SBIconView : UIView
+- (void)prepareForReuse;
+@end
+
+@interface SBIconListView : UIView
 - (void)showAllIcons;
 @end
 
-@interface SBRootFolderView : NSObject {
+@interface SBRootFolderView : UIView {
 	UIView *_dockView;
 	SBIconListView *_dockListView;
 }
@@ -67,6 +71,9 @@
 	//[[rootFolderController contentView] resetIconListViews]; // Fallback, but slow
 	SBRootFolderView *rootFolderView = [rootFolderController contentView];
 	SBIconListView *dockListView = [rootFolderView valueForKey:@"_dockListView"];
+	for (SBIconView *iconView in [dockListView subviews]){
+		[iconView prepareForReuse];
+	}
 	[dockListView showAllIcons];
 
 	[[rootFolderView currentIconListView] showAllIcons];
@@ -81,10 +88,16 @@
 	dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 		if (currentPageIndex < listViewCount-1){
 			SBIconListView *iconListView = [iconLists objectAtIndex:currentPageIndex+1];
+			for (SBIconView *iconView in [iconListView subviews]){
+				[iconView prepareForReuse];
+			}
 			[iconListView showAllIcons];
 		}
 		if (currentPageIndex > 0){
 			SBIconListView *iconListView = [iconLists objectAtIndex:currentPageIndex-1];
+			for (SBIconView *iconView in [iconListView subviews]){
+				[iconView prepareForReuse];
+			}
 			[iconListView showAllIcons];
 		}
 	});
