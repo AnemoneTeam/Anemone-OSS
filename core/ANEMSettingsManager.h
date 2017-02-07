@@ -4,6 +4,7 @@
 
 @interface ANEMSettingsManager : NSObject {
 	NSArray *_themeSettings;
+	BOOL _CGImageHookEnabled;
 	BOOL _loadOnlyThemedCGImages;
 	BOOL _optithemeEnabled;
 
@@ -17,8 +18,13 @@
 - (NSArray *)themeSettings;
 - (NSString *)themesDir;
 - (void)forceReloadNow;
+
 - (BOOL)onlyLoadThemedCGImages;
 - (void)setOnlyLoadThemedCGImages:(BOOL)load;
+
+- (BOOL)isCGImageHookEnabled;
+- (void)setCGImageHookEnabled:(BOOL)enabled;
+
 - (BOOL)masksOnly;
 
 #ifndef NO_OPTITHEME

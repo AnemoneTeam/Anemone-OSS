@@ -12,20 +12,25 @@ CGImageRef *(*oldCGImageSourceCreateWithFile)(NSString *, NSDictionary*);
 CGImageRef *(*oldCGImageSourceCreateWithURL)(NSURL *, NSDictionary*);
 
 CGImageRef *newCGImageSourceCreateWithFile(NSString *path, NSDictionary *options){
-	NSString *themedPath = [path anemoneThemedPath];
-	if ([[ANEMSettingsManager sharedManager] onlyLoadThemedCGImages]){
-		if (![themedPath hasPrefix:@"/Library/Themes"] && ![themedPath hasPrefix:@"/var/stash/anemonecache"] && ![themedPath hasPrefix:@"/System/Library/PreferenceBundles/VPNPreferences.bundle/"])
-			return nil;
+	if ([[ANEMSettingsManager sharedManager] isCGImageHookEnabled]){
+		NSString *themedPath = [path anemoneThemedPath];
+		if ([[ANEMSettingsManager sharedManager] onlyLoadThemedCGImages]){
+			if (![themedPath hasPrefix:@"/Library/Themes"] && ![themedPath hasPrefix:@"/var/stash/anemonecache"] && ![themedPath hasPrefix:@"/System/Library/PreferenceBundles/VPNPreferences.bundle/"])
+				return nil;
+		}
+		path = themedPath;
 	}
-	return oldCGImageSourceCreateWithFile(themedPath, options);
+	return oldCGImageSourceCreateWithFile(path, options);
 }
 
 CGImageRef *newCGImageSourceCreateWithURL(NSURL *url, NSDictionary *options){
-	if ([url isFileURL])
-		url = [NSURL fileURLWithPath:[[url path] anemoneThemedPath]];
-	if ([[ANEMSettingsManager sharedManager] onlyLoadThemedCGImages]){
-		if (![[url absoluteString] hasPrefix:@"file:///Library/Themes"] && ![[url absoluteString] hasPrefix:@"file:///var/stash/anemonecache"] && ![[url absoluteString] hasPrefix:@"file:///System/Library/PreferenceBundles/VPNPreferences.bundle/"])
-			return nil;
+	if ([[ANEMSettingsManager sharedManager] isCGImageHookEnabled]){
+		if ([url isFileURL])
+			url = [NSURL fileURLWithPath:[[url path] anemoneThemedPath]];
+		if ([[ANEMSettingsManager sharedManager] onlyLoadThemedCGImages]){
+			if (![[url absoluteString] hasPrefix:@"file:///Library/Themes"] && ![[url absoluteString] hasPrefix:@"file:///var/stash/anemonecache"] && ![[url absoluteString] hasPrefix:@"file:///System/Library/PreferenceBundles/VPNPreferences.bundle/"])
+				return nil;
+		}
 	}
 	return oldCGImageSourceCreateWithURL(url, options);
 }

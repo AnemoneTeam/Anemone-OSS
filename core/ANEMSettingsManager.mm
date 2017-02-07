@@ -25,6 +25,14 @@
 @end
 
 @implementation ANEMSettingsManager
+- (instancetype)init {
+	self = [super init];
+	if (self){
+		_CGImageHookEnabled = YES;
+	}
+	return self;
+}
+
 + (instancetype)sharedManager {
 	static ANEMSettingsManager *sharedInstance;
 	static dispatch_once_t onceToken;
@@ -73,6 +81,14 @@
 	else
 		map = [objc_getClass("SBIconViewMap") homescreenMap];
 	[map recycleAndPurgeAll];
+}
+
+- (BOOL)isCGImageHookEnabled {
+	return _CGImageHookEnabled;
+}
+
+- (void)setCGImageHookEnabled:(BOOL)enabled {
+	_CGImageHookEnabled = enabled;
 }
 
 - (BOOL)onlyLoadThemedCGImages {
