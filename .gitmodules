@@ -1,0 +1,3 @@
+[submodule "common/fishhook"]
+	path = common/fishhook
+	url = https://github.com/facebook/fishhook
