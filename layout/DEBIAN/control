@@ -1,0 +1,12 @@
+Package: com.anemonetheming.anemone
+Name: Anemone
+Depends: firmware (>=7.0), mobilesubstrate, com.rpetrich.rocketbootstrap, pincrush
+Provides: org.coolstar.themelib, anemoneteam.anemone, org.coolstar.classicdock, winterboard, org.coolstar.classicbadges, org.coolstar.customclock, com.codethemed.iconbundles, com.idd.iconomatic, com.bytafont.bytafonttm
+Replaces: org.coolstar.themelib, anemoneteam.anemone, org.coolstar.classicdock, winterboard, org.coolstar.classicbadges, com.codethemed.iconbundles, com.idd.iconomatic, com.bytafont.bytafonttm
+Conflicts: org.coolstar.themelib, anemoneteam.anemone, winterboard, com.codethemed.iconbundles, com.idd.iconomatic, com.bytafont.bytafonttm
+Version: 2.1.1
+Architecture: iphoneos-arm
+Description: An awesome theme manager!
+Maintainer: AnemoneTeam <anemonetheming@gmail.com>
+Author: AnemoneTeam <anemonetheming@gmail.com>
+Section: Tweaks

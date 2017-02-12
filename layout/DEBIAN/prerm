@@ -1,0 +1,4 @@
+#!/bin/bash
+
+recache --no-respring
+launchctl unload /Library/LaunchDaemons/com.anemonetheming.optitheme.plist

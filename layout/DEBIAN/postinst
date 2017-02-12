@@ -1,0 +1,12 @@
+#!/bin/bash
+
+chown root:wheel /Library/LaunchDaemons/com.anemonetheming.optitheme.plist
+chmod 0644 /Library/LaunchDaemons/com.anemonetheming.optitheme.plist
+launchctl load /Library/LaunchDaemons/com.anemonetheming.optitheme.plist
+rm /var/mobile/Library/Caches/com.anemoneteam.themegroups.plist 2>/dev/null || true
+rm /var/mobile/Library/Caches/com.anemoneteam.themenames.plist 2>/dev/null || true
+rm /var/mobile/Library/Caches/com.anemoneteam.themeidentifiers.plist 2>/dev/null || true
+rm /var/mobile/Library/Caches/com.anemoneteam.themelist.plist 2>/dev/null || true
+rm /var/mobile/Library/Caches/com.anemoneteam.themenameoverrides.plist 2>/dev/null || true
+recache --no-respring
+su mobile -c "uicache"
