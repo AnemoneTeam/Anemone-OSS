@@ -1,6 +1,6 @@
 #import "ANEMSettingsManager.h"
 #import "Bundle.h"
-#import "../common/fishhook.h"
+#import "../common/fishhook/fishhook.h"
 
 extern "C" {
 	CGImageRef *CGImageSourceCreateWithFile(NSString *, NSDictionary*);

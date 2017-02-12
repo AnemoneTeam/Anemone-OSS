@@ -11,7 +11,7 @@ else
 	AnemoneCore_FILES += OptithemeCheck.xm
 endif
 ifeq ($(NO_SUBSTRATE),1)
-	AnemoneCore_FILES += ../common/fishhook.c
+	AnemoneCore_FILES += ../common/fishhook/fishhook.c
 	AnemoneCore_CFLAGS += -DNO_SUBSTRATE
 endif
 AnemoneCore_LDFLAGS = -Wl,-segalign,4000 -L../common -lrocketbootstrap
