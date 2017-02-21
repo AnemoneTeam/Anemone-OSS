@@ -9,7 +9,7 @@
 
 #ifndef NO_OPTITHEME
 #import "../common/CPDistributedMessagingCenter.h"
-#import "../common/rocketbootstrap.h"
+#import <rocketbootstrap/rocketbootstrap.h>
 #endif
 
 static NSMutableDictionary *cachedBundles = nil;
@@ -52,6 +52,10 @@ static NSMutableDictionary *cachedBundles = nil;
 	if ([self hasPrefix:themesDir])
 		return self;
 	if ([self hasPrefix:@"/var/mobile/Library/Caches"])
+		return self;
+	if ([self hasSuffix:@".artwork"])
+		return self;
+	if ([self hasSuffix:@".car"])
 		return self;
 	self = [self stringByResolvingSymlinksInPath];
 	NSString *fileName = [self lastPathComponent];
@@ -121,7 +125,7 @@ static NSMutableDictionary *cachedBundles = nil;
 	#endif
 
 	NSString *folderName = [[self stringByDeletingLastPathComponent] lastPathComponent];
-	
+
 	for (NSString *theme in themes)
 		{
 		if (bundle && !useOptithemeInstead){
@@ -158,7 +162,7 @@ static NSMutableDictionary *cachedBundles = nil;
 				if ([[NSFileManager defaultManager] fileExistsAtPath:path])
 					return path;
 			}
-			
+
 			if (enableLegacy){
 				size_t size;
 				sysctlbyname("hw.machine", NULL, &size, NULL, 0);
@@ -213,7 +217,7 @@ static NSMutableDictionary *cachedBundles = nil;
 	NSString *language = [locale objectForKey:NSLocaleLanguageCode];
 	if (!tableName)
 		tableName = @"Localizable";
-		
+
 	NSArray *themes = [[ANEMSettingsManager sharedManager] themeSettings];
 
 	for (NSString *theme in themes)
@@ -266,7 +270,7 @@ static NSMutableDictionary *cachedBundles = nil;
 		}
 	}
 	#endif
-	
+
 	for (NSString *theme in themes)
 	{
 		NSString *path = [NSString stringWithFormat:@"%@/%@.theme/Bundles/%@/%@",themesDir,theme,self.bundleIdentifier,fileName];
