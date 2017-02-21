@@ -1,6 +1,6 @@
 #import "core/ANEMSettingsManager.h"
 #import "common/CPDistributedMessagingCenter.h"
-#import "common/rocketbootstrap.h"
+#import <rocketbootstrap/rocketbootstrap.h>
 #import <dlfcn.h>
 #import <objc/runtime.h>
 
