@@ -4,6 +4,14 @@
 #import <dlfcn.h>
 #import <objc/runtime.h>
 
+@interface CPBitmapStore : NSObject
+- (void)purge;
+@end
+
+@interface _UIStatusBarCache : NSObject
++ (instancetype)sharedInstance;
+@end
+
 @interface SBIconView : UIView
 - (void)prepareForReuse;
 @end
@@ -65,6 +73,9 @@
 	[[%c(ANEMSettingsManager) sharedManager] setOptithemeEnabled:YES];
 #endif
 
+	CPBitmapStore *statusBarCacheStore = [[%c(_UIStatusBarCache) sharedInstance] valueForKey:@"_store"];
+	[statusBarCacheStore purge];
+
 	SBIconController *iconController = [%c(SBIconController) sharedInstance];
 	SBRootFolderController *rootFolderController = [iconController valueForKey:@"_rootFolderController"];
 
@@ -72,7 +83,8 @@
 	SBRootFolderView *rootFolderView = [rootFolderController contentView];
 	SBIconListView *dockListView = [rootFolderView valueForKey:@"_dockListView"];
 	for (SBIconView *iconView in [dockListView subviews]){
-		[iconView prepareForReuse];
+		if ([iconView respondsToSelector:@selector(prepareForReuse)])
+			[iconView prepareForReuse];
 	}
 	[dockListView showAllIcons];
 
@@ -89,14 +101,16 @@
 		if (currentPageIndex < listViewCount-1){
 			SBIconListView *iconListView = [iconLists objectAtIndex:currentPageIndex+1];
 			for (SBIconView *iconView in [iconListView subviews]){
-				[iconView prepareForReuse];
+				if ([iconView respondsToSelector:@selector(prepareForReuse)])
+					[iconView prepareForReuse];
 			}
 			[iconListView showAllIcons];
 		}
 		if (currentPageIndex > 0){
 			SBIconListView *iconListView = [iconLists objectAtIndex:currentPageIndex-1];
 			for (SBIconView *iconView in [iconListView subviews]){
-				[iconView prepareForReuse];
+				if ([iconView respondsToSelector:@selector(prepareForReuse)])
+					[iconView prepareForReuse];
 			}
 			[iconListView showAllIcons];
 		}
